@@ -1,0 +1,147 @@
+{
+  "name": "N8N_AI_WF",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -432,
+        16
+      ],
+      "id": "a8199a97-2197-4199-9fb4-04a375e6f464",
+      "name": "When chat message received",
+      "webhookId": "9bb64bcf-f1a9-4773-aad3-219196240336"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -240,
+        -80
+      ],
+      "id": "d641f6ca-0eb7-4084-b197-ca9817782004",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        144
+      ],
+      "id": "161d8dc7-738a-4736-b786-efc906c4933a",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "AYAt9yeIeYsYMdSW",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "value": "10001",
+          "mode": "list",
+          "cachedResultName": "VWO Project"
+        },
+        "issueType": {
+          "__rl": true,
+          "value": "10009",
+          "mode": "list",
+          "cachedResultName": "Bug"
+        },
+        "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}",
+        "additionalFields": {
+          "assignee": {
+            "__rl": true,
+            "value": "712020:e51ac4d3-ae0b-4d19-b652-1b2f29b98064",
+            "mode": "list",
+            "cachedResultName": "Shivkumar Udage"
+          },
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "priority": {
+            "__rl": true,
+            "value": "3",
+            "mode": "list",
+            "cachedResultName": "Medium"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        128
+      ],
+      "id": "fd148a60-73f0-4070-b2d4-f9a93c8eeffb",
+      "name": "Create an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "OepjJJH3opOX0CjR",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a357c21a-d5ce-49b0-a521-f8b469f16d07",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d95d7a11fbfdd315d56e2f9b8114b7802832afddb7c199774a2cfe16f92d3132"
+  },
+  "id": "QQfYyt3zvWawTmE1",
+  "tags": []
+}
